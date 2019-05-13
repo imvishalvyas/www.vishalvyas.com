@@ -1,49 +1,75 @@
-### Have you ever received this error while using gmail smtp setting to send from your app? 
+Ansible is a automation tool which is widely used, you can install and install, configure and manage number of system and services remotely. you can install software and manage services and tasks without needing manually log in to each servers. you have to install ansible in one machine and use ssh to communicate host each other.
 
-`ERROR` : 
+
+Ansible uses Playbooks which is written in YAML format. it's uses module base format. with playbook can run multiple tasks at time and provide more advance functionality, YAML file always start with "---" syntax.
+
+### In this article we will see how to install and configure apahce2 using ansible YAML script.
+
+Master server : 10.80.253.11 [Ansible server, ]
+Slave 1           : 10.80.253.12 [need to install apache2 in slave 1]
+Slave 2           : 10.80.253.13 [need to install apache2 in slave 2]
+
+We need to configure slave server info in our ansible configuration file, click here to know how to add client machine to ansible.
+
+Let's update our apache2.yml file and install apche on both slave servers. add below lines in YAML file and save.
 ```
-t=2019-01-31T10:58:08+0000 lvl=eror msg="Failed to send alert notification email" logger=alerting.notifier.email error="534 5.7.9 Application-specific password required. Learn more at\n5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor r12sm5483812wrq.3 - gsmtp"
+$ vim apache2.yml
+```
+```
+---
+- hosts: servers  #server host or group name 
+  sudo: yes
+  tasks:
+    - name: install apache2
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+  handlers:
+    - name: restart apache2
+      service: name=apache2 state=restarted
 ```
 
-`Reason` : you have used your email password to authorised app but app will not used your gmail password instead it will giving error to create Application Specific password.
+`Syntex` : 
+-hosts : it's our server group name 
+-name : define name of package need to be installed.
 
-Now If you faced this error the you have to create application specific password for your app and use that password to authenticate your app using SMTP.
-
-`Solution` : 
-
-### 1. Go to the google account click here : https://myaccount.google.com
-
-### 2. On the left penal Click on the security.
-
-
-vishalvyas1
-
-### 3. Click on app password below 2-Step Verification.it will ask you password of your gmail account for verification.
-
-
-vishalvyas2
-
-### 4. Select app. i am using mail authentication so i will select mail.
-
-
-vishalvyas4
-
-### 5. Click on select device. where you want to authenticate with device. i am using monitoring tool setup and require smtp setup so i will select other option and provide that name of applicaiton.
-
-
-vishalvyas5
-
-### 6. Click on generate. 
-
-
-vishalvyas6
-
-### 7. Click on done button.
-
-
-Now you can use that password to authenticate your gmail account with your app.
-
-`Success Logs` :
+Now let's run our playbook, it will install apache2 on both the servers.
 ```
-t=2019-01-31T11:38:03+0000 lvl=info msg="Sending alert notification to" logger=alerting.notifier.email addresses="[vishal@vishalvyas.com]
+$ansible-playbook apache.yml
 ```
+```
+PLAY [servers] ********************************************************************************
+
+TASK [Gathering Facts] ************************************************************************
+ok: [slave2]
+ok: [slave1]
+
+TASK [install apache2] ************************************************************************
+changed: [slave1]
+changed: [slave2]
+
+TASK [enabled mod_rewrite] ********************************************************************
+changed: [slave1]
+changed: [slave2]
+
+RUNNING HANDLER [restart apache2] *************************************************************
+changed: [slave2]
+changed: [slave1]
+
+PLAY RECAP ************************************************************************************
+slave1                     : ok=4    changed=3    unreachable=0    failed=0
+slave2                     : ok=4    changed=3    unreachable=0    failed=0
+```
+
+That's it, apahce2 is now installed on both slave serves. there is no failed messages. you can verify it using slave server ip address in web browser.
+
+
+
+So we have installed apache only on servers using ansible playbooks, in the next article i will explain you to how to deploy static website with images using ansible playbook. Keep reading and share our posts.
+
+thanks,
+Vishal Vyas
