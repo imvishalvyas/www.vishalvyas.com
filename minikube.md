@@ -85,13 +85,13 @@ $ minikube dashboard --url
 http://192.168.1.10:30000
 
 
-Stop the minikube.
-
+## Stop the minikube.
+```
 $ minikube stop
+```
 
-
-Delete minikube cluster.
-
+## Delete minikube cluster.
+```
 $ minikube delete
-
+```
 
