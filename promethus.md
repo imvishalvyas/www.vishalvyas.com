@@ -1,4 +1,4 @@
-How to deploy Prometheus on Kubernetes.
+# How to deploy Prometheus on Kubernetes.
 
 
 
