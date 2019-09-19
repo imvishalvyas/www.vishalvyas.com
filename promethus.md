@@ -222,10 +222,19 @@ data:
 
 here we have use the below jobs to monitoring metrics.
 
+
 `kubernetes-cadvisor` : It will get caadvisor metrics from kubernetes.
+
+
 `kubernetes-service-endpoints` : it will get the metrics of services.
+
+
 `kubernetes-pods` : It will get metrics of kubernetes pods.
+
+
 `kubernetes-nodes` : It will get metrics of kubernetes nodes.
+
+
 `kubernetes-apiservers` : It will get metrics from kubernetes apis.
 
 
