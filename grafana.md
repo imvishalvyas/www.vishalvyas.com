@@ -1,6 +1,7 @@
-#Monitor gcp stackdriver in grafana.
+# Monitor gcp stackdriver in grafana.
 
-I assumed that you have installed grafana. We want to monitor GCP resources graph and logs in grafana. For that we will have to configure stackdriver in grafana. We will add Stackdriver as a datasource in Grafana and then you can see stackdriver dashboard metrics in Grafana dashboard. Grafana is widely used to monitor resoucers and visulize monitoring graphs. So here are some steps to configure GCP stackdriver in grafana.
+We want to monitor GCP resources graph and logs in grafana. For that we will have to configure stackdriver in grafana. We will add Stackdriver as a datasource in Grafana and then you can see stackdriver dashboard metrics in Grafana dashboard. Grafana is widely used to monitor resoucers and visulize monitoring graphs. So here are some steps to configure GCP stackdriver in grafana. I assumed that you have installed grafana.
+
 
 ### 1. Create GCP service account JSON file.
 
@@ -8,15 +9,15 @@ To authenticate with stackdriver from grafana, we need to create a service accou
 
 * Login into the GCP consol.
 
-* Go to the IAM & ADMIN and click on Service Accounts.
+* Go to the `IAM & ADMIN` and click on `Service Accounts`.
 
 * Click on `CREATE SERVICE ACCOUNT`
 
-* Type service account name and click on create button.
+* Type service account `name` and click on create button.
 
 Now it will ask for service account permission, As we just want to monitoring permission so we will select `Monitoring Viewer` role and continue.
 
-* Click on create key and select key type JSON.
+* Click on `create key` and select key type JSON.
 
 * Key will be downloaded in your machine.
 
@@ -29,7 +30,7 @@ Now we have GCP project key with monitoring permission, So we will import this k
 
 * Login to the Grafana.
 
-* Go to setting configuration and click on datasource.
+* Go to `setting` configuration and click on `datasource`.
 
 * Select Datasource `Stackdricer`.
 
