@@ -22,7 +22,7 @@ Now it will ask for service account permission, As we just want to monitoring pe
 * Key will be downloaded in your machine.
 
 
-Now we have GCP project key with monitoring permission, So we will import this key in grafana to allow stackdriver monitoring.
+Now we have GCP project key with `monitoring` permission, So we will import this key in grafana to allow stackdriver monitoring.
 
 
 ### 2. Configure Grafana.
