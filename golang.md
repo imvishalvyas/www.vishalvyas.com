@@ -1,32 +1,32 @@
-* How to Install Go 1.13 on Ubuntu.
+# How to Install Go 1.13 on Ubuntu.
 
 Go is an opensource programing language developed by google. It's very popular and many companies using their application in go. It has robust set of library and tools. Many applications such as Docker and Kubernetes are written in Go. In this tutorial i will help you to install Go version `1.13.4` in Ubuntu 18.04.
 
 
-** Remove the existing golang
+### Remove the existing golang
 You have to remove existing golang from your machine.
 ```
 sudo apt-get purge golang*
 ```
 
-** Download Go.
+### Download Go.
 Download the latest version of the Go from it's official website. Click here to more.
 
 ```
 https://dl.google.com/go/go1.13.4.linux-amd64.tar.gz
 ```
 
-Step 3: Extract it in /usr/local using the command below, You have to replace the filename with the actual filename based on the version you have downloaded.
+### Extract it in /usr/local using the command below, You have to replace the filename with the actual filename based on the version you have downloaded.
 
 tar -C /usr/local -xzf go1.13.4.linux-amd64.tar.gz
 
 
-** Create .go directory in home.
+### Create .go directory in home.
 ```
 mkdir /go
 ```
 
-** Set up the environment variables.
+### Set up the environment variables.
 
 ```
 GOROOT=/usr/local/go
@@ -34,19 +34,19 @@ GOPATH=~/go
 PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 
-** Update the go command
+### Update the go command
 
 sudo update-alternatives --install "/usr/bin/go" "go" "/usr/local/go/bin/go" 0
 sudo update-alternatives --set go /usr/local/go/bin/go
 
-** Check the Go version.
+### Check the Go version.
 ```
 go version
 ---go version go1.13.4 linux/amd64---
 ```
 
 
-** Verify the variables settings.
+### Verify the variables settings.
 
 ```
 go env
