@@ -1,1 +1,7 @@
-#Common Errors devops &  Linux.
+# Common Errors devops &  Linux.
+
+* 1. Error response from daemon: conflict: unable to delete 5218c63546d3 (must be forced) - image is referenced in multiple repositories
+`Solution` : You will need to use `force` to remove this images. IT will remove the image even if it's used by containers.
+```
+docker rmi -f <IMAGE_ID>
+```
