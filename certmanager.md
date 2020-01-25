@@ -1,9 +1,9 @@
-2. Create a namespace `cert-manager`.
+### 2. Create a namespace `cert-manager`.
 ```
 kubectl create namespace cert-manager
 ```
 
-3. Install Cert-manager
+### 3. Install Cert-manager
 Now, Install the cert manager and CRDS. it will install issuer and clusterissuer also.
 
 ```
@@ -39,7 +39,7 @@ cert-manager-webhook-74d98fdc7b-nbv8x      1/1     Running   0          1m
 ```
 
 
-5. Create Let'sencrypt issuer 
+### 5. Create Let'sencrypt issuer 
 Now let's create issuer file to issue TLS certificates to the domains. You can create staging issuer to test, But we will directly create production issuer.
 ```
 apiVersion: cert-manager.io/v1alpha2
