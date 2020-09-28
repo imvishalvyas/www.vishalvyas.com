@@ -1,4 +1,4 @@
-#FATAL: too large   
+# FATAL: too large   
 
 Today I have updated some node version in my gitlab ci pipeline, After upgrading the version I ran the pipeline and I got an error that ERROR: Uploading artifacts as "archive" to coordinator... too large archive.
 
