@@ -1,6 +1,6 @@
 # How to configure gcr private images in GitLab ci
 
-Recently I was configuring the GitLab pipeline using my own private docker image which is stored in the google cloud container registry. Below is my `.gitlab-ci.yml` file.
+Recently I was configuring the GitLab pipeline using my own private docker image which was stored in the google cloud container registry. Below is my `.gitlab-ci.yml` file.
 
 ```
 image: docker:19.03.12
