@@ -2,13 +2,13 @@ MySQL is the most popular open-source and widely used relational database manage
 
 
 ### How to create MySQL database using CLI
-
 Login to MySQL as the root  user
 ```
 mysql -u root -p
 ```
 
 ### Create a database name mydb
+Run this command to create a new database.
 ```
 create database mydb;
 ```
@@ -28,8 +28,8 @@ We have successfully created the database and user yet, Now it's time to grant p
 ```
 GRANT ALL PRIVILEGES ON * . * TO 'vishal'@'localhost';
 ```
-```
 There are several more grant options available that you can use.
+```
 CREATE: The user can create a database and tables
 SELECT: The user can retrieve the data
 DELETE: The user can erase the table entries
