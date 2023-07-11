@@ -29,3 +29,9 @@ Change 'example.com' to the domain(s) you want to enable to embed your website i
 Select the right directive option depending on your individual needs and security concerns. Once you've decided, insert the corresponding 'add_header' directive into the appropriate Nginx server block. To make the changes take effect, save the configuration file and restart Nginx.
 
 Remember to adapt the settings to the relevant server block and make sure you have permission to alter Nginx's configuration files.
+
+You can allow multiple domains in the Content-Security-Policy (CSP) frame-ancestors directive. This lets you define numerous domains that can include your website in an iframe. Here's an example of how to allow multiple domains using the CSP frame-ancestors directive:
+
+   ```nginx
+   add_header Content-Security-Policy "frame-ancestors 'self' domain1.com domain2.com;";
+   ```
