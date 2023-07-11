@@ -4,21 +4,21 @@ The X-Frame-Options header is a security header that Nginx (and other web server
 
 You can use the X-Frame-Options header to specify whether your website can be loaded within an iframe on another domain. You may protect your users by specifying the right value for this header, which prevents your website from being embedded in iframes on harmful or illegal domains.
 
-Certainly! There are a couple ways to include the X-Frame-Options header with a valid directive in Nginx. The following are valid directive options:
+Certainly! There are a couple of ways to include the X-Frame-Options header with a valid directive in Nginx. The following are valid directive options:
 
-1. DENY Directive: This directive blocks any domain from loading your website in an iframe. It is the most hard method of combating clickjacking violence.
+DENY Directive: This directive blocks any domain from loading your website in an iframe. It is the hardest method of combating clickjacking violence.
 
    ```nginx
    add_header X-Frame-Options "DENY";
    ```
 
-2. SAMEORIGIN Directive: With this directive, your website can only be loaded in an iframe if the parent document is from the same origin (same domain). It allows for some flexibility while also protecting your website against cross-origin framing assaults.
+SAMEORIGIN Directive: With this directive, your website can only be loaded in an iframe if the parent document is from the same origin (same domain). It allows for some flexibility while also protecting your website against cross-origin framing assaults.
 
    ```nginx
    add_header X-Frame-Options "SAMEORIGIN";
    ```
 
-3. Policy on Content Security (CSP) The Frame-Ancients Directive: This directive is preferred for current browsers since it gives you more flexibility over frame options. It enables you to create a Content Security Policy that determines which domains are allowed to embed your website in an iframe.
+Policy on Content Security (CSP) The Frame-Ancients Directive: This directive is preferred for current browsers since it gives you more flexibility over frame options. It enables you to create a Content Security Policy that determines which domains are allowed to embed your website in an iframe.
 
    ```nginx
    add_header Content-Security-Policy "frame-ancestors 'self' example.com;";
@@ -28,4 +28,4 @@ Change 'example.com' to the domain(s) you want to enable to embed your website i
 
 Select the right directive option depending on your individual needs and security concerns. Once you've decided, insert the corresponding 'add_header' directive into the appropriate Nginx server block. To make the changes take effect, save the configuration file and restart Nginx.
 
-Remember to adapt the settings to the relevant server block and make sure you have the permissions to alter Nginx's configuration files.
+Remember to adapt the settings to the relevant server block and make sure you have permission to alter Nginx's configuration files.
