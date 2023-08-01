@@ -1,0 +1,78 @@
+In this tutorial, I will show you how to copy an object from one AWS S3 account's S3 bucket to another AWS S3 bucket. You can use the AWS CLI or AWS SDKs with cross-account permissions to copy S3 bucket objects between AWS accounts.
+
+Here are some preliminary steps to take before getting started:
+
+1. You will need two AWS accounts: one for the source bucket and one for the destination bucket.
+2. Create an IAM user in the destination AWS account.
+3. Ensure that you have configured cli on your system and that you have used the same user account credentials that you created in point 2.
+4. Get the 12-digit AWS Account ID from the console. Click on your account name in the top-right corner of the AWS console to find the AWS Account ID.
+
+
+Source Bucket Setup:
+First, we will configure the source bucket. Let us make a bucket in the source account and add some files to it. Apply the following policy to the bucket you created:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DelegateS3Access",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::DESTINATION_S3_BUCKET_ACCOUNT_NUMBER:root"
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::SOURCE_S3_BUCKET_NAME/*",
+                "arn:aws:s3:::SOURCE_S3_BUCKET_NAME"
+            ]
+        }
+    ]
+}
+```
+You can find the 'DESTINATION_S3_BUCKET_ACCOUNT_NUMBER' in point 4 above.
+
+Destination Bucket Configuration:
+Step 1: Sign in to the destination AWS account and create a bucket. There is no need to add any policies to the destination bucket here.
+
+Step 2: As I mentioned in the previous points, you must create a new user for this setup. Go to IAM and create a user, then attach the following policy to the user: If you already have an IAM user, you only need to attach this policy to that user.
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::SOURCE_S3_BUCKET_NAME",
+                "arn:aws:s3:::SOURCE_S3_BUCKET_NAME/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::DESTINATION_S3_BUCKET_NAME",
+                "arn:aws:s3:::DESTINATION_S3_BUCKET_NAME/*"
+            ]
+        }
+    ]
+}
+```
+
+Test the configuration:
+Let us try copying some data into the destination bucket from the command line. Before running the command, you must first upload some data to the Source bucket.
+
+aws s3 sync s3://source-bucket s3://destination-bucket --source-region SOURCE_REGION
+
+Replace source-bucket with the name of Account A's source bucket and destination-bucket with the name of Account B's destination bucket. Replace SOURCE_REGION with the AWS region in which the source bucket is located.
